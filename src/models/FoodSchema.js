@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 let foodSchema = mongoose.Schema({
-    name: {
+    foodname: {
         type: String,
         required: [true, 'Food name is required'],
         trim: true

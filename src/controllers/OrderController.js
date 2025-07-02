@@ -16,7 +16,7 @@ let createOrder = async (req, res) => {
 let fetchAllOrders = async (req, res) => {
     try {
         let result = await Order.find()
-            .populate("customer","name email")
+            .populate("customer")
             .populate("items.food")
         res.status(200).json(result)
     } catch (error) {
@@ -52,5 +52,54 @@ let updateOrder = async (req, res) => {
         res.status(500).json(error)
     }
 }
+let fetchOrdersByCustomer = async (req, res) => {
+    let { customerId } = req.body
 
-export { createOrder, fetchAllOrders, deleteOrder, updateOrder }
+    try {
+        let result = await Order.find({
+            customer: customerId
+        }).populate("customer")
+            .populate("items.food")
+
+
+        // let result = await Order.where("customer")
+        //     .eq(customerId)
+        //     .populate("customer")
+        //     .populate("items.food")
+
+
+        res.status(200).json(result)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+
+}
+
+
+
+
+let fetchTotalRevenue = async (req, res) => {
+    try {
+        const result = await Order.aggregate([
+            {
+                $match: {
+                    status: "delivered",
+                }
+            },
+            // {
+            //     $unwind: "$items" // Unwind the items array to process individual dishes
+            // },
+            {
+                $group: {
+                    _id: null, // No grouping key to calculate the total
+                    totalRevenue: { $sum: "$totalPrice" } // Sum up the TotalAmount field
+                }
+            }
+        ])
+        console.log(result);
+        res.status(200).json({ data: result })
+    } catch (error) {
+        console.log(error.message);
+    }
+}
+export { createOrder, fetchOrdersByCustomer, fetchAllOrders,fetchTotalRevenue, deleteOrder, updateOrder }

@@ -1,5 +1,5 @@
 import express from 'express'
-import { createOrder, deleteOrder, fetchAllOrders, updateOrder } from '../controllers/OrderController.js'
+import { createOrder, deleteOrder, fetchAllOrders, fetchOrdersByCustomer, fetchTotalRevenue, updateOrder } from '../controllers/OrderController.js'
 
 let orderRouter = express.Router()
 
@@ -8,4 +8,6 @@ orderRouter.post("/createorder", createOrder)
 orderRouter.delete("/deleteorder", deleteOrder)
 orderRouter.put("/updateorder", updateOrder)
 
-export { orderRouter}
+orderRouter.post("/fetchordersbycustomer", fetchOrdersByCustomer)
+orderRouter.get("/fetchRevenue", fetchTotalRevenue)
+export { orderRouter }

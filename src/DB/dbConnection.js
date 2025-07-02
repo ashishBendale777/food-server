@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-let DB_URL = "mongodb://localhost:27017/db-food";
+let DB_URL = "mongodb://127.0.0.1:27017/db-food-20025";
 
 async function connectToDatabase() {
     try {

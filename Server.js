@@ -5,12 +5,18 @@ import { customerRouter } from './src/routes/CustomerRoutes.js';
 import { foodRouter } from './src/routes/FoodRoutes.js';
 import { reviewRouter } from './src/routes/ReviewRoutes.js';
 import { orderRouter } from './src/routes/OrderRoutes.js';
+import { counterRouter } from './src/routes/DashsboardRoutes.js';
+
+
+
 import cors from 'cors'
 
 let Server = express()
 
 Server.use(bodyParser.json())
 
+
+///cross origin resource sharing
 Server.use(cors())
 
 connectToDatabase()
@@ -19,6 +25,7 @@ Server.use("/api", customerRouter)
 Server.use("/api", foodRouter)
 Server.use("/api", reviewRouter)
 Server.use("/api", orderRouter)
+Server.use("/api", counterRouter)
 
 Server.use("/Uploadimages", express.static("Uploadimages"))
 

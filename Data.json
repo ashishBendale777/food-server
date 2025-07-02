@@ -23,7 +23,7 @@
     "customer": "682eb52224209b8f664caa65",
     "items": [
         {
-            "food": "682ff8422a9cbd79de1a9338",
+            "food": "",
             "quantity": 3
         },
         {
@@ -38,7 +38,7 @@
     "totalPrice": 123123,
 }
 //review json
-{
+{682ff8422a9cbd79de1a9338
     "customer": "682eb52224209b8f664caa65",
     "food": "682ff8422a9cbd79de1a9338",
     "rating": 5,

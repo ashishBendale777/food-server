@@ -3,7 +3,8 @@ import { Food } from "../models/FoodSchema.js"
 let createFood = async (req, res) => {
     let reqData = req.body
     try {
-        let result = await Food.create(reqData)
+        let filePath = req.file ? req.file.path : null
+        let result = await Food.create({ ...reqData, image: filePath })
         res.status(200).json({
             data: result,
             message: "Food Added Successfully"
